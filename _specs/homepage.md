@@ -486,79 +486,420 @@ Gracefully handle:
 
 # 15. Task Breakdown
 
-### Task 1
+# Homepage Implementation Tasks
 
-Create the global layout.
+## Phase 1 — Foundation
 
-* Navbar
-* Footer
-* Container
+### Task 1.1 — Create the Container Component
 
----
+**Objective**
+Create a reusable `Container` component that standardizes page width and horizontal spacing across the application.
 
-### Task 2
+**Acceptance Criteria**
 
-Build the Hero section.
+* Responsive max-width
+* Consistent horizontal padding
+* Reusable on all pages
+* Uses semantic HTML where appropriate
 
----
+**Dependencies**
 
-### Task 3
-
-Build the Search section.
-
----
-
-### Task 4
-
-Build Category cards and Categories section.
+* None
 
 ---
 
-### Task 5
+### Task 1.2 — Create the Navbar Component
+
+**Objective**
+Build the global navigation bar.
+
+**Acceptance Criteria**
+
+* Responsive layout
+* Logo
+* Navigation links
+* Login button
+* Sign Up button
+* Mobile navigation menu
+* Sticky header
+* Keyboard accessible
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+### Task 1.3 — Create the Footer Component
+
+**Objective**
+Build the global footer.
+
+**Acceptance Criteria**
+
+* Product links
+* Company links
+* Social links
+* Copyright
+* Responsive layout
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+## Phase 2 — Hero
+
+### Task 2.1 — Build the Hero Section
+
+**Objective**
+
+Create the landing hero.
+
+**Acceptance Criteria**
+
+* Headline
+* Supporting text
+* Primary CTA
+* Secondary CTA
+* Illustration placeholder
+* Responsive layout
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+## Phase 3 — Search
+
+### Task 3.1 — Build the Search Section
+
+**Objective**
+
+Create the homepage search interface.
+
+**Acceptance Criteria**
+
+* Search input
+* Category selector
+* Location selector (UI only)
+* Search button
+* Responsive layout
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+## Phase 4 — Categories
+
+### Task 4.1 — Create the CategoryCard Component
+
+**Objective**
+
+Build a reusable category card.
+
+**Acceptance Criteria**
+
+* Icon
+* Category name
+* Event count
+* Hover interaction
+* Accessible
+
+**Dependencies**
+
+* None
+
+---
+
+### Task 4.2 — Build the Categories Section
+
+**Objective**
+
+Display featured categories using the reusable CategoryCard component.
+
+**Acceptance Criteria**
+
+* Section heading
+* Responsive grid
+* Mock data
+* View All action (optional)
+
+**Dependencies**
+
+* Task 4.1
+
+---
+
+## Phase 5 — Events
+
+### Task 5.1 — Create the EventCard Component
+
+**Objective**
 
 Build the reusable EventCard component.
 
----
+**Acceptance Criteria**
 
-### Task 6
+* Event image
+* Title
+* Date
+* Location
+* Event type badge
+* Mode badge
+* Save button
+* Hover animation
+* Accessible
 
-Build the Featured Events section.
+**Dependencies**
 
----
-
-### Task 7
-
-Build the Upcoming Events section.
-
----
-
-### Task 8
-
-Build the SpeakerCard component and Featured Speakers section.
+* None
 
 ---
 
-### Task 9
+### Task 5.2 — Build the Featured Events Section
 
-Build the OrganizerCard component and Featured Organizers section.
+**Objective**
+
+Display featured events using the EventCard component.
+
+**Acceptance Criteria**
+
+* Section heading
+* Event grid
+* Mock data
+* "View All Events" button
+
+**Dependencies**
+
+* Task 5.1
 
 ---
 
-### Task 10
+### Task 5.3 — Build the Upcoming Events Section
 
-Build the Community CTA and Newsletter sections.
+**Objective**
+
+Display upcoming events in chronological order.
+
+**Acceptance Criteria**
+
+* Responsive layout
+* Date emphasis
+* Event metadata
+* Uses mock data
+
+**Dependencies**
+
+* Task 5.1
 
 ---
 
-### Task 11
+## Phase 6 — Speakers
 
-Add loading, empty, and error states.
+### Task 6.1 — Create the SpeakerCard Component
+
+**Objective**
+
+Build a reusable speaker card.
+
+**Acceptance Criteria**
+
+* Avatar
+* Name
+* Company
+* Expertise
+* Social links (optional)
+* Responsive
+
+**Dependencies**
+
+* None
 
 ---
 
-### Task 12
+### Task 6.2 — Build the Featured Speakers Section
 
-Perform responsive testing, accessibility review, and UI polish.
+**Objective**
+
+Display highlighted speakers.
+
+**Acceptance Criteria**
+
+* Responsive grid
+* Section heading
+* Mock data
+
+**Dependencies**
+
+* Task 6.1
+
+---
+
+## Phase 7 — Organizers
+
+### Task 7.1 — Create the OrganizerCard Component
+
+**Objective**
+
+Build a reusable organizer card.
+
+**Acceptance Criteria**
+
+* Logo
+* Organization name
+* Description
+* Number of hosted events
+* Responsive
+
+**Dependencies**
+
+* None
+
+---
+
+### Task 7.2 — Build the Featured Organizers Section
+
+**Objective**
+
+Display organizer profiles.
+
+**Acceptance Criteria**
+
+* Section heading
+* Responsive grid
+* Mock data
+
+**Dependencies**
+
+* Task 7.1
+
+---
+
+## Phase 8 — Community
+
+### Task 8.1 — Build the Community CTA Section
+
+**Objective**
+
+Encourage users to become organizers.
+
+**Acceptance Criteria**
+
+* Headline
+* Description
+* CTA button
+* Responsive design
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+### Task 8.2 — Build the Newsletter Section
+
+**Objective**
+
+Allow users to subscribe for updates.
+
+**Acceptance Criteria**
+
+* Email input
+* Subscribe button
+* Success state placeholder
+* Accessible form
+
+**Dependencies**
+
+* Task 1.1
+
+---
+
+## Phase 9 — UI States
+
+### Task 9.1 — Create Loading States
+
+**Acceptance Criteria**
+
+* Skeleton components
+* Event loading skeleton
+* Card loading skeleton
+
+---
+
+### Task 9.2 — Create Empty States
+
+**Acceptance Criteria**
+
+* No events
+* No categories
+* No speakers
+* No organizers
+
+---
+
+### Task 9.3 — Create Error States
+
+**Acceptance Criteria**
+
+* Friendly error messaging
+* Retry action placeholder
+
+---
+
+## Phase 10 — Polish
+
+### Task 10.1 — Responsive Review
+
+**Acceptance Criteria**
+
+* Mobile
+* Tablet
+* Desktop
+
+---
+
+### Task 10.2 — Accessibility Review
+
+**Acceptance Criteria**
+
+* Keyboard navigation
+* Focus indicators
+* Semantic HTML
+* Color contrast
+* ARIA where required
+
+---
+
+### Task 10.3 — UI Polish
+
+**Acceptance Criteria**
+
+* Consistent spacing
+* Smooth hover animations
+* Typography review
+* Visual consistency
+* No layout shifts
+
+---
+
+## Definition of Done
+
+The Homepage feature is complete when:
+
+* All tasks are completed.
+* Components are reusable.
+* Mock data is used consistently.
+* The layout is fully responsive.
+* Accessibility requirements are met.
+* There are no TypeScript or ESLint errors.
+* The implementation follows the project's PRD, Design System, Architecture, and AI Development Guide.
+
 
 ---
 
