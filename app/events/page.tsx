@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Container from "@/components/layout/Container";
 import PageHeader from "@/components/shared/PageHeader";
-import EventsSearchBar from "@/components/events/EventsSearchBar";
+import EventsSearchSection from "@/components/events/EventsSearchSection";
 
 export const metadata: Metadata = {
   title: "Events | DevEvents",
@@ -23,12 +22,7 @@ export default function EventsPage() {
         breadcrumbs={BREADCRUMBS}
       />
 
-      {/* Search Section */}
-      <section aria-label="Search events" className="border-b border-border py-4 md:py-6">
-        <Container>
-          <EventsSearchBar />
-        </Container>
-      </section>
+      <EventsSearchSection />
 
       {/* Task 3.1 — Filter Bar */}
       <div />
