@@ -57,12 +57,12 @@ export default function SearchBar() {
           ))}
         </select>
 
-        {/* Location select — disabled, future-ready */}
+        {/* Location select — disabled, future-ready; hidden on mobile to keep form compact */}
         <select
           disabled
           aria-label="Filter by location (coming soon)"
           title="Location filter coming soon"
-          className={cn(fieldClass, "cursor-not-allowed opacity-50 md:w-40")}
+          className={cn(fieldClass, "hidden cursor-not-allowed opacity-50 md:block md:w-40")}
         >
           <option>All Locations</option>
         </select>
