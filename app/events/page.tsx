@@ -4,7 +4,9 @@ import EventsSearchSection from "@/components/events/EventsSearchSection";
 import EventsFilterBar from "@/components/events/EventsFilterBar";
 import EventsSortBar from "@/components/events/EventsSortBar";
 import ResultsSummary from "@/components/events/ResultsSummary";
+import EventGrid from "@/components/events/EventGrid";
 import Container from "@/components/layout/Container";
+import { MOCK_EVENTS } from "@/data/events";
 
 export const metadata: Metadata = {
   title: "Events | DevEvents",
@@ -34,12 +36,11 @@ export default function EventsPage() {
 
       <div className="border-b border-border py-3 md:py-4">
         <Container>
-          <ResultsSummary total={0} />
+          <ResultsSummary total={MOCK_EVENTS.length} />
         </Container>
       </div>
 
-      {/* Task 6.2 — Events Grid */}
-      <div />
+      <EventGrid events={MOCK_EVENTS} />
 
       {/* Task 13.1 — Pagination */}
       <div />
