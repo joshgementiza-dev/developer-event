@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import type { Category } from "@/constants/categories";
-import type { EventMode, EventDifficulty } from "@/types/event";
+import type { EventMode, EventDifficulty, SortOption } from "@/types/event";
 import type { DateFilterValue } from "./DateFilter";
 import { MOCK_EVENTS } from "@/data/events";
 import EventsSearchSection from "./EventsSearchSection";
@@ -18,10 +18,11 @@ export default function EventsContent() {
   const [mode, setMode] = useState<EventMode | "">("");
   const [difficulty, setDifficulty] = useState<EventDifficulty | "">("");
   const [dateFilter, setDateFilter] = useState<DateFilterValue | "">("");
+  const [sort, setSort] = useState<SortOption>("upcoming");
 
   const filteredEvents = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return MOCK_EVENTS.filter((e) => {
+    const filtered = MOCK_EVENTS.filter((e) => {
       if (category && e.category !== category) return false;
       if (mode && e.mode !== mode) return false;
       if (difficulty && e.difficulty !== difficulty) return false;
@@ -55,7 +56,15 @@ export default function EventsContent() {
       }
       return true;
     });
-  }, [query, category, mode, difficulty, dateFilter]);
+
+    if (sort === "upcoming") {
+      filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    } else if (sort === "newest") {
+      filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    }
+
+    return filtered;
+  }, [query, category, mode, difficulty, dateFilter, sort]);
 
   const filterCount = [category, mode, difficulty, dateFilter].filter(Boolean).length;
 
@@ -78,7 +87,7 @@ export default function EventsContent() {
         onClear={handleClear}
       />
 
-      <EventsSortBar />
+      <EventsSortBar value={sort} onChange={setSort} />
 
       <div className="border-b border-border py-3 md:py-4">
         <Container>
