@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, MapPin, Bookmark } from "lucide-react";
-import type { EventType } from "@/types/event";
+import type { EventDifficulty, EventType } from "@/types/event";
 
 const MODE_STYLES: Record<EventType["mode"], string> = {
   "in-person": "bg-green-500/10 text-green-500",
@@ -15,6 +15,18 @@ const MODE_LABELS: Record<EventType["mode"], string> = {
   hybrid: "Hybrid",
 };
 
+const DIFFICULTY_STYLES: Record<EventDifficulty, string> = {
+  beginner: "bg-green-500/10 text-green-500",
+  intermediate: "bg-amber-500/10 text-amber-500",
+  advanced: "bg-red-500/10 text-red-500",
+};
+
+const DIFFICULTY_LABELS: Record<EventDifficulty, string> = {
+  beginner: "Beginner",
+  intermediate: "Intermediate",
+  advanced: "Advanced",
+};
+
 type EventCardProps = Omit<EventType, "id">;
 
 export default function EventCard({
@@ -24,6 +36,7 @@ export default function EventCard({
   time,
   location,
   mode,
+  difficulty,
   price,
   href,
 }: EventCardProps) {
@@ -57,6 +70,13 @@ export default function EventCard({
           >
             {MODE_LABELS[mode]}
           </span>
+          {difficulty && (
+            <span
+              className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${DIFFICULTY_STYLES[difficulty]}`}
+            >
+              {DIFFICULTY_LABELS[difficulty]}
+            </span>
+          )}
           {price === null ? (
             <span className="inline-flex items-center rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-500">
               Free
