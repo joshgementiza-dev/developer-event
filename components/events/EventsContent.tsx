@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
+import { SearchX, CalendarX } from "lucide-react";
+import EmptyState from "@/components/shared/EmptyState";
 import type { Category } from "@/constants/categories";
 import type { EventMode, EventDifficulty, SortOption } from "@/types/event";
 import type { DateFilterValue } from "./DateFilter";
@@ -70,6 +72,29 @@ export default function EventsContent() {
 
   const filterCount = [category, mode, difficulty, dateFilter].filter(Boolean).length;
 
+  const emptyState: ReactNode = (() => {
+    if (MOCK_EVENTS.length === 0) {
+      return (
+        <EmptyState
+          icon={CalendarX}
+          title="No events available"
+          description="Check back later for upcoming events."
+        />
+      );
+    }
+    if (filteredEvents.length === 0) {
+      return (
+        <EmptyState
+          icon={SearchX}
+          title="No events found"
+          description="Try adjusting your search or filters to find what you're looking for."
+          action={{ label: "Clear Filters", onClick: handleClear }}
+        />
+      );
+    }
+    return undefined;
+  })();
+
   function handleClear() {
     setCategory("");
     setMode("");
@@ -101,7 +126,7 @@ export default function EventsContent() {
         </Container>
       </div>
 
-      <EventGrid events={filteredEvents} />
+      <EventGrid events={filteredEvents} emptyState={emptyState} />
     </>
   );
 }

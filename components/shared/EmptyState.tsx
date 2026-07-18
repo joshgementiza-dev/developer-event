@@ -5,7 +5,8 @@ import { buttonVariants } from "@/components/ui/button";
 
 interface EmptyStateAction {
   label: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
 interface EmptyStateProps {
@@ -44,15 +45,22 @@ export default function EmptyState({
       )}
 
       {action && (
-        <Link
-          href={action.href}
-          className={cn(
-            buttonVariants({ variant: "outline", size: "sm" }),
-            "mt-6"
-          )}
-        >
-          {action.label}
-        </Link>
+        action.href ? (
+          <Link
+            href={action.href}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "mt-6")}
+          >
+            {action.label}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={action.onClick}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "mt-6")}
+          >
+            {action.label}
+          </button>
+        )
       )}
     </div>
   );

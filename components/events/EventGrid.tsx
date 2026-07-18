@@ -4,17 +4,22 @@ import Container from "@/components/layout/Container";
 
 interface EventGridProps {
   events: EventType[];
+  emptyState?: React.ReactNode;
 }
 
-export default function EventGrid({ events }: EventGridProps) {
+export default function EventGrid({ events, emptyState }: EventGridProps) {
   return (
     <section aria-label="Events" className="py-8 md:py-12">
       <Container>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {events.map(({ id, ...cardProps }) => (
-            <EventCard key={id} {...cardProps} />
-          ))}
-        </div>
+        {events.length === 0 && emptyState ? (
+          emptyState
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {events.map(({ id, ...cardProps }) => (
+              <EventCard key={id} {...cardProps} />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );
