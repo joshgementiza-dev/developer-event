@@ -61,6 +61,8 @@ export default function EventsContent() {
       filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     } else if (sort === "newest") {
       filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (sort === "alphabetical") {
+      filtered.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     return filtered;
