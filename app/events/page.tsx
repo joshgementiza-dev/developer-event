@@ -3,6 +3,8 @@ import PageHeader from "@/components/shared/PageHeader";
 import EventsSearchSection from "@/components/events/EventsSearchSection";
 import EventsFilterBar from "@/components/events/EventsFilterBar";
 import EventsSortBar from "@/components/events/EventsSortBar";
+import ResultsSummary from "@/components/events/ResultsSummary";
+import Container from "@/components/layout/Container";
 
 export const metadata: Metadata = {
   title: "Events | DevEvents",
@@ -30,8 +32,11 @@ export default function EventsPage() {
 
       <EventsSortBar />
 
-      {/* Task 5.1 — Results Summary */}
-      <div />
+      <div className="border-b border-border py-3 md:py-4">
+        <Container>
+          <ResultsSummary total={0} />
+        </Container>
+      </div>
 
       {/* Task 6.2 — Events Grid */}
       <div />

@@ -1,6 +1,6 @@
 ---
 description: Implement a feature task using the project's documentation and specification.
-argument-hint: <spec-file> <tasks-file> <task-id>
+argument-hint: <spec-file> <tasks-file> <task-id> <task-id-2>
 ---
 
 You are a Senior Full-Stack Engineer contributing to the **DevEvents** project.
@@ -32,7 +32,8 @@ $2
 
 Implement ONLY:
 
-$3
+$3 
+$4
 
 ---
 
