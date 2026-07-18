@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/shared/PageHeader";
 import EventsSearchSection from "@/components/events/EventsSearchSection";
+import EventsFilterBar from "@/components/events/EventsFilterBar";
 
 export const metadata: Metadata = {
   title: "Events | DevEvents",
@@ -24,8 +25,7 @@ export default function EventsPage() {
 
       <EventsSearchSection />
 
-      {/* Task 3.1 — Filter Bar */}
-      <div />
+      <EventsFilterBar />
 
       {/* Task 4.1 — Sort Dropdown */}
       <div />

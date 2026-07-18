@@ -1,4 +1,5 @@
 export type EventMode = "in-person" | "online" | "hybrid";
+export type EventDifficulty = "beginner" | "intermediate" | "advanced";
 
 export interface EventType {
   id: string;
