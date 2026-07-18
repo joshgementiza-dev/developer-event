@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
+import type { EventMode, EventDifficulty } from "@/types/event";
 import Container from "@/components/layout/Container";
 import CategoryFilter from "./CategoryFilter";
 import ModeFilter from "./ModeFilter";
@@ -9,8 +10,25 @@ import DifficultyFilter from "./DifficultyFilter";
 import DateFilter from "./DateFilter";
 import ClearFiltersButton from "./ClearFiltersButton";
 
-export default function EventsFilterBar() {
+interface EventsFilterBarProps {
+  onCategoryChange?: (value: string) => void;
+  onModeChange?: (value: EventMode | "") => void;
+  onDifficultyChange?: (value: EventDifficulty | "") => void;
+  onClear?: () => void;
+}
+
+export default function EventsFilterBar({
+  onCategoryChange,
+  onModeChange,
+  onDifficultyChange,
+  onClear,
+}: EventsFilterBarProps) {
   const [clearCount, setClearCount] = useState(0);
+
+  function handleClear() {
+    setClearCount((c) => c + 1);
+    onClear?.();
+  }
 
   return (
     <div className="border-b border-border py-3 md:py-4">
@@ -25,12 +43,12 @@ export default function EventsFilterBar() {
             Filters
           </span>
 
-          <CategoryFilter key={`category-${clearCount}`} />
-          <ModeFilter key={`mode-${clearCount}`} />
-          <DifficultyFilter key={`difficulty-${clearCount}`} />
+          <CategoryFilter key={`category-${clearCount}`} onChange={onCategoryChange} />
+          <ModeFilter key={`mode-${clearCount}`} onChange={onModeChange} />
+          <DifficultyFilter key={`difficulty-${clearCount}`} onChange={onDifficultyChange} />
           <DateFilter key={`date-${clearCount}`} />
 
-          <ClearFiltersButton onClick={() => setClearCount((c) => c + 1)} />
+          <ClearFiltersButton onClick={handleClear} />
         </div>
       </Container>
     </div>
