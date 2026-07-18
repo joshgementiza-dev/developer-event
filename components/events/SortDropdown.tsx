@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import type { SortOption } from "@/types/event";
 import { cn } from "@/lib/utils";
-
-type SortOption = "upcoming" | "newest" | "alphabetical";
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "upcoming", label: "Upcoming" },
@@ -13,16 +11,13 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 ];
 
 interface SortDropdownProps {
-  onChange?: (value: SortOption) => void;
+  value: SortOption;
+  onChange: (value: SortOption) => void;
 }
 
-export default function SortDropdown({ onChange }: SortDropdownProps) {
-  const [value, setValue] = useState<SortOption>("upcoming");
-
+export default function SortDropdown({ value, onChange }: SortDropdownProps) {
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const next = e.target.value as SortOption;
-    setValue(next);
-    onChange?.(next);
+    onChange(e.target.value as SortOption);
   }
 
   return (
