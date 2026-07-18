@@ -1,11 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import Container from "@/components/layout/Container";
 import CategoryFilter from "./CategoryFilter";
 import ModeFilter from "./ModeFilter";
 import DifficultyFilter from "./DifficultyFilter";
 import DateFilter from "./DateFilter";
+import ClearFiltersButton from "./ClearFiltersButton";
 
 export default function EventsFilterBar() {
+  const [clearCount, setClearCount] = useState(0);
+
   return (
     <div className="border-b border-border py-3 md:py-4">
       <Container>
@@ -19,15 +25,12 @@ export default function EventsFilterBar() {
             Filters
           </span>
 
-          <CategoryFilter />
+          <CategoryFilter key={`category-${clearCount}`} />
+          <ModeFilter key={`mode-${clearCount}`} />
+          <DifficultyFilter key={`difficulty-${clearCount}`} />
+          <DateFilter key={`date-${clearCount}`} />
 
-          <ModeFilter />
-
-          <DifficultyFilter />
-
-          <DateFilter />
-
-          {/* Task 3.6 — Clear Filters Button */}
+          <ClearFiltersButton onClick={() => setClearCount((c) => c + 1)} />
         </div>
       </Container>
     </div>
