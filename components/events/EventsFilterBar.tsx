@@ -3,6 +3,7 @@ import Container from "@/components/layout/Container";
 import CategoryFilter from "./CategoryFilter";
 import ModeFilter from "./ModeFilter";
 import DifficultyFilter from "./DifficultyFilter";
+import DateFilter from "./DateFilter";
 
 export default function EventsFilterBar() {
   return (
@@ -24,7 +25,8 @@ export default function EventsFilterBar() {
 
           <DifficultyFilter />
 
-          {/* Task 3.5 — Date Filter */}
+          <DateFilter />
+
           {/* Task 3.6 — Clear Filters Button */}
         </div>
       </Container>
