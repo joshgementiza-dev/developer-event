@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, type ReactNode } from "react";
+import { useState, useMemo, useEffect, type ReactNode } from "react";
 import { SearchX, CalendarX } from "lucide-react";
 import EmptyState from "@/components/shared/EmptyState";
 import type { Category } from "@/constants/categories";
@@ -12,7 +12,10 @@ import EventsFilterBar from "./EventsFilterBar";
 import EventsSortBar from "./EventsSortBar";
 import ResultsSummary from "./ResultsSummary";
 import EventGrid from "./EventGrid";
+import Pagination from "@/components/shared/Pagination";
 import Container from "@/components/layout/Container";
+
+const PAGE_SIZE = 9;
 
 export default function EventsContent() {
   const [query, setQuery] = useState("");
@@ -21,6 +24,7 @@ export default function EventsContent() {
   const [difficulty, setDifficulty] = useState<EventDifficulty | "">("");
   const [dateFilter, setDateFilter] = useState<DateFilterValue | "">("");
   const [sort, setSort] = useState<SortOption>("upcoming");
+  const [page, setPage] = useState(1);
 
   const filteredEvents = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -69,6 +73,14 @@ export default function EventsContent() {
 
     return filtered;
   }, [query, category, mode, difficulty, dateFilter, sort]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, category, mode, difficulty, dateFilter, sort]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
+  const safePage = Math.min(page, pageCount);
+  const pagedEvents = filteredEvents.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   const filterCount = [category, mode, difficulty, dateFilter].filter(Boolean).length;
 
@@ -126,7 +138,15 @@ export default function EventsContent() {
         </Container>
       </div>
 
-      <EventGrid events={filteredEvents} emptyState={emptyState} />
+      <EventGrid events={pagedEvents} emptyState={emptyState} />
+
+      {filteredEvents.length > 0 && (
+        <div className="py-8 md:py-10">
+          <Container>
+            <Pagination page={safePage} pageCount={pageCount} onPageChange={setPage} />
+          </Container>
+        </div>
+      )}
     </>
   );
 }

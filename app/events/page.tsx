@@ -23,9 +23,6 @@ export default function EventsPage() {
       />
 
       <EventsContent />
-
-      {/* Task 13.1 — Pagination */}
-      <div />
     </>
   );
 }
