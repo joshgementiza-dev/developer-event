@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import type { Category } from "@/constants/categories";
 import type { EventMode, EventDifficulty } from "@/types/event";
+import type { DateFilterValue } from "./DateFilter";
 import { MOCK_EVENTS } from "@/data/events";
 import EventsSearchSection from "./EventsSearchSection";
 import EventsFilterBar from "./EventsFilterBar";
@@ -16,6 +17,7 @@ export default function EventsContent() {
   const [category, setCategory] = useState<Category | "">("");
   const [mode, setMode] = useState<EventMode | "">("");
   const [difficulty, setDifficulty] = useState<EventDifficulty | "">("");
+  const [dateFilter, setDateFilter] = useState<DateFilterValue | "">("");
 
   const filteredEvents = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -23,6 +25,28 @@ export default function EventsContent() {
       if (category && e.category !== category) return false;
       if (mode && e.mode !== mode) return false;
       if (difficulty && e.difficulty !== difficulty) return false;
+      if (dateFilter) {
+        const eventDate = new Date(e.date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (dateFilter === "today") {
+          const tomorrow = new Date(today);
+          tomorrow.setDate(today.getDate() + 1);
+          if (!(eventDate >= today && eventDate < tomorrow)) return false;
+        } else if (dateFilter === "this-week") {
+          const weekEnd = new Date(today);
+          weekEnd.setDate(today.getDate() + 7);
+          if (!(eventDate >= today && eventDate <= weekEnd)) return false;
+        } else if (dateFilter === "this-month") {
+          if (
+            !(
+              eventDate.getMonth() === today.getMonth() &&
+              eventDate.getFullYear() === today.getFullYear()
+            )
+          )
+            return false;
+        }
+      }
       if (q) {
         if (e.title.toLowerCase().includes(q)) return true;
         if (e.description?.toLowerCase().includes(q)) return true;
@@ -31,14 +55,15 @@ export default function EventsContent() {
       }
       return true;
     });
-  }, [query, category, mode, difficulty]);
+  }, [query, category, mode, difficulty, dateFilter]);
 
-  const filterCount = [category, mode, difficulty].filter(Boolean).length;
+  const filterCount = [category, mode, difficulty, dateFilter].filter(Boolean).length;
 
   function handleClear() {
     setCategory("");
     setMode("");
     setDifficulty("");
+    setDateFilter("");
   }
 
   return (
@@ -49,6 +74,7 @@ export default function EventsContent() {
         onCategoryChange={(v) => setCategory(v as Category | "")}
         onModeChange={setMode}
         onDifficultyChange={setDifficulty}
+        onDateChange={setDateFilter}
         onClear={handleClear}
       />
 

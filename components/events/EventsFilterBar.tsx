@@ -7,13 +7,14 @@ import Container from "@/components/layout/Container";
 import CategoryFilter from "./CategoryFilter";
 import ModeFilter from "./ModeFilter";
 import DifficultyFilter from "./DifficultyFilter";
-import DateFilter from "./DateFilter";
+import DateFilter, { type DateFilterValue } from "./DateFilter";
 import ClearFiltersButton from "./ClearFiltersButton";
 
 interface EventsFilterBarProps {
   onCategoryChange?: (value: string) => void;
   onModeChange?: (value: EventMode | "") => void;
   onDifficultyChange?: (value: EventDifficulty | "") => void;
+  onDateChange?: (value: DateFilterValue | "") => void;
   onClear?: () => void;
 }
 
@@ -21,6 +22,7 @@ export default function EventsFilterBar({
   onCategoryChange,
   onModeChange,
   onDifficultyChange,
+  onDateChange,
   onClear,
 }: EventsFilterBarProps) {
   const [clearCount, setClearCount] = useState(0);
@@ -46,7 +48,7 @@ export default function EventsFilterBar({
           <CategoryFilter key={`category-${clearCount}`} onChange={onCategoryChange} />
           <ModeFilter key={`mode-${clearCount}`} onChange={onModeChange} />
           <DifficultyFilter key={`difficulty-${clearCount}`} onChange={onDifficultyChange} />
-          <DateFilter key={`date-${clearCount}`} />
+          <DateFilter key={`date-${clearCount}`} onChange={onDateChange} />
 
           <ClearFiltersButton onClick={handleClear} />
         </div>

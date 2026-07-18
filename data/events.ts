@@ -5,7 +5,7 @@ export const MOCK_EVENTS: EventType[] = [
     id: "evt-1",
     title: "ReactConf 2026",
     banner: "https://picsum.photos/seed/reactconf/800/450",
-    date: "Aug 15, 2026",
+    date: "Jul 20, 2026",
     time: "9:00 AM",
     location: "San Francisco, CA",
     mode: "in-person",

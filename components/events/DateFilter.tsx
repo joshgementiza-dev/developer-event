@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type DateFilterValue = "today" | "this-week" | "this-month";
+export type DateFilterValue = "today" | "this-week" | "this-month";
 
 const DATE_OPTIONS: { value: DateFilterValue; label: string }[] = [
   { value: "today", label: "Today" },
